@@ -5,6 +5,7 @@ import 'services/notification_service.dart';
 import 'services/payment_notification_service.dart';
 import 'screens/add_bill_screen.dart';
 import 'screens/bill_list_screen.dart';
+import 'screens/statistics_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -44,6 +45,7 @@ class _HomePageState extends State<HomePage> {
   final List<Widget> _pages = [
     const HomeContent(),
     const BillListScreen(),
+    const StatisticsScreen(),
   ];
 
   @override
@@ -121,6 +123,10 @@ class _HomePageState extends State<HomePage> {
           BottomNavigationBarItem(
             icon: Icon(Icons.list),
             label: '账单',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.pie_chart),
+            label: '统计',
           ),
         ],
       ),
