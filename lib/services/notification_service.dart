@@ -1,9 +1,14 @@
+import 'dart:convert';
+import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:permission_handler/permission_handler.dart';
+import '../models/bill.dart';
+import '../screens/add_bill_screen.dart';
 
 class NotificationService {
   static final NotificationService instance = NotificationService._internal();
   final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
+  final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
   NotificationService._internal();
 
@@ -15,7 +20,21 @@ class NotificationService {
       initializationSettings,
       onDidReceiveNotificationResponse: (NotificationResponse response) async {
         // 处理通知点击事件
-        print('Notification clicked: ${response.payload}');
+        if (response.payload != null) {
+          try {
+            final billMap = json.decode(response.payload!);
+            final bill = Bill.fromMap(billMap);
+            
+            // 打开编辑账单页面
+            navigatorKey.currentState?.push(
+              MaterialPageRoute(
+                builder: (context) => AddBillScreen(bill: bill),
+              ),
+            );
+          } catch (e) {
+            print('Error processing notification payload: $e');
+          }
+        }
       },
     );
   }
