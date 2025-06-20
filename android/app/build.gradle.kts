@@ -1,8 +1,9 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
-    id("dev.flutter.flutter-gradle-plugin")
 }
+
+apply(from = "$rootDir/../packages/flutter_tools/gradle/flutter.gradle")
 
 android {
     namespace = "com.example.flutter_application_1"
@@ -20,5 +21,10 @@ android {
         getByName("release") {
             isMinifyEnabled = false
         }
+    }
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
     }
 }
