@@ -38,14 +38,8 @@ dependencies:
   provider: 6.1.1
   # 本地存储
   sqflite: 2.3.2
-  sqflite_common: 2.5.3
   path: 1.8.3
   shared_preferences: 2.2.3
-  shared_preferences_android: 2.2.2
-  shared_preferences_foundation: 2.5.0
-  shared_preferences_linux: 2.4.0
-  shared_preferences_web: 2.2.2
-  shared_preferences_windows: 2.4.0
   # 通知监听
   flutter_local_notifications: 16.3.2
   # UI组件
@@ -54,24 +48,7 @@ dependencies:
   # 工具
   intl: 0.19.0
   permission_handler: 11.3.1
-  permission_handler_android: 12.0.13
-  permission_handler_html: 0.1.1
-  permission_handler_platform_interface: 4.2.3
   device_info_plus: 9.1.2
-  meta: 1.10.0
-  source_span: 1.10.0
-  stack_trace: 1.11.1
-  stream_channel: 2.1.2
-  string_scanner: 1.2.0
-  synchronized: 3.1.0+1
-  term_glyph: 1.2.1
-  test_api: 0.6.1
-  web: 0.3.0
-  win32: 5.2.0
-  win32_registry: 1.1.2
-  xdg_directories: 1.0.4
-  vector_math: 2.1.4
-  timezone: 0.9.4
 
 dev_dependencies:
   flutter_test:
