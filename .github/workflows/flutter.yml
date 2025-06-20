@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - dev
+      - main
   pull_request:
 
 jobs:
@@ -15,14 +16,31 @@ jobs:
     - name: Checkout Repository
       uses: actions/checkout@v4
 
+    - name: Set up Java
+      uses: actions/setup-java@v3
+      with:
+        distribution: 'zulu'
+        java-version: '17'
+
     - name: Set up Flutter
       uses: subosito/flutter-action@v2
       with:
-        flutter-version: '3.32.4'  # 你当前的 Flutter 版本
+        flutter-version: '3.32.4'
         cache: true
+        cache-key: flutter-store-${{ runner.os }}-${{ hashFiles('**/pubspec.lock') }}
+        cache-path: ${{ runner.tool_cache }}/flutter
 
     - name: Install dependencies
       run: flutter pub get
+
+    # - name: Run tests
+    #   run: flutter test
+
+    - name: Check code format
+      run: dart format --set-exit-if-changed .
+
+    # - name: Analyze code
+    #   run: flutter analyze
 
     - name: Build APK
       run: flutter build apk --release
@@ -32,3 +50,4 @@ jobs:
       with:
         name: app-release.apk
         path: build/app/outputs/flutter-apk/app-release.apk
+        retention-days: 7
