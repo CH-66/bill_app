@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:permission_handler/permission_handler.dart';
 import '../models/bill.dart';
@@ -32,7 +33,7 @@ class NotificationService {
               ),
             );
           } catch (e) {
-            print('Error processing notification payload: $e');
+            debugPrint('Error processing notification payload: $e');
           }
         }
       },

@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import '../models/bill.dart';
 import 'notification_service.dart';
@@ -18,7 +19,7 @@ class PaymentNotificationService {
       final bool hasPermission = await _channel.invokeMethod('checkNotificationPermission');
       return hasPermission;
     } on PlatformException catch (e) {
-      print('Failed to check notification permission: ${e.message}');
+      debugPrint('Failed to check notification permission: ${e.message}');
       return false;
     }
   }
@@ -27,7 +28,7 @@ class PaymentNotificationService {
     try {
       await _channel.invokeMethod('openNotificationSettings');
     } on PlatformException catch (e) {
-      print('Failed to open notification settings: ${e.message}');
+      debugPrint('Failed to open notification settings: ${e.message}');
     }
   }
 
@@ -57,11 +58,11 @@ class PaymentNotificationService {
             payload: json.encode(bill.toMap()),
           );
         } catch (e) {
-          print('Error processing payment notification: $e');
+          debugPrint('Error processing payment notification: $e');
         }
       },
       onError: (error) {
-        print('Error from payment notification stream: $error');
+        debugPrint('Error from payment notification stream: $error');
       },
     );
   }

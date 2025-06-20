@@ -55,51 +55,52 @@ class _HomePageState extends State<HomePage> {
   }
 
   Future<void> _initializeApp() async {
+    if (!mounted) return;
+    
     // 请求通知权限
     final hasPermission = await NotificationService.instance.requestNotificationPermission();
     if (!hasPermission) {
-      if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('需要通知权限才能监听支付消息'),
-            duration: Duration(seconds: 5),
-          ),
-        );
-      }
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('需要通知权限才能监听支付消息'),
+          duration: Duration(seconds: 5),
+        ),
+      );
       return;
     }
 
     // 检查通知访问权限
     final hasNotificationAccess = await PaymentNotificationService.instance.checkNotificationPermission();
     if (!hasNotificationAccess) {
-      if (mounted) {
-        showDialog(
-          context: context,
-          builder: (context) => AlertDialog(
-            title: const Text('需要通知访问权限'),
-            content: const Text('为了监听支付消息，需要授予通知访问权限。请在设置中启用。'),
-            actions: [
-              TextButton(
-                onPressed: () => Navigator.pop(context),
-                child: const Text('取消'),
-              ),
-              TextButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                  PaymentNotificationService.instance.openNotificationSettings();
-                },
-                child: const Text('去设置'),
-              ),
-            ],
-          ),
-        );
-      }
+      if (!mounted) return;
+      showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: const Text('需要通知访问权限'),
+          content: const Text('为了监听支付消息，需要授予通知访问权限。请在设置中启用。'),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: const Text('取消'),
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context);
+                PaymentNotificationService.instance.openNotificationSettings();
+              },
+              child: const Text('去设置'),
+            ),
+          ],
+        ),
+      );
       return;
     }
 
     // 启动支付通知监听
     PaymentNotificationService.instance.startListening();
 
+    if (!mounted) return;
     // 加载账单数据
     await Provider.of<BillProvider>(context, listen: false).loadBills();
   }
