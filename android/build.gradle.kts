@@ -13,4 +13,5 @@ allprojects {
         mavenCentral()
     }
 }
-apply(from = "$rootDir/../packages/flutter_tools/gradle/flutter.gradle")
+val flutterRoot = System.getenv("FLUTTER_ROOT")
+apply(from = "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle")
