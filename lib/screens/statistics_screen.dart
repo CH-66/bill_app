@@ -299,7 +299,7 @@ class _StatisticsScreenState extends State<StatisticsScreen> with SingleTickerPr
                           _buildSummaryCard(bills),
                           const Padding(
                             padding: EdgeInsets.all(16),
-                            child: Text(
+                            child: const Text(
                               '月度收支趋势',
                               style: TextStyle(
                                 fontSize: 18,
@@ -317,7 +317,7 @@ class _StatisticsScreenState extends State<StatisticsScreen> with SingleTickerPr
                         children: [
                           const Padding(
                             padding: EdgeInsets.all(16),
-                            child: Text(
+                            child: const Text(
                               '支出分类占比',
                               style: TextStyle(
                                 fontSize: 18,
@@ -335,7 +335,7 @@ class _StatisticsScreenState extends State<StatisticsScreen> with SingleTickerPr
                         children: [
                           const Padding(
                             padding: EdgeInsets.all(16),
-                            child: Text(
+                            child: const Text(
                               '日收支情况',
                               style: TextStyle(
                                 fontSize: 18,
