@@ -1,10 +1,11 @@
+
+
 plugins {
     id("com.android.application")
-    kotlin("android")
+    id("org.jetbrains.kotlin.android")
 }
-
 val flutterRoot = System.getenv("FLUTTER_ROOT")
-apply(from = "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle")
+apply(from = "$rootDir/../packages/flutter_tools/gradle/flutter.gradle")
 
 android {
     namespace = "com.example.flutter_application_1"
