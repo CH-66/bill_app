@@ -1,9 +1,10 @@
 plugins {
     id("com.android.application")
-    id("kotlin-android")
-    // The Flutter Gradle Plugin must be applied after the Android and Kotlin Gradle plugins.
-    id("dev.flutter.flutter-gradle-plugin")
+    kotlin("android")
 }
+
+val flutterRoot = System.getenv("FLUTTER_ROOT")
+apply(from = "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle")
 
 android {
     namespace = "com.example.flutter_application_1"
@@ -49,10 +50,6 @@ android {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
     }
-}
-
-flutter {
-    source = "../.."
 }
 
 dependencies {
