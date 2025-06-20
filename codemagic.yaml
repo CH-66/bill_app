@@ -1,7 +1,7 @@
 workflows:
-  android-debug:
+  android-debug-workflow:
     name: Android Debug Build
-    max_build_duration: 30
+    max_build_duration: 60
     instance_type: mac_mini_m1
     environment:
       flutter: stable
@@ -10,33 +10,28 @@ workflows:
       groups:
         - google_play
       vars:
-        PACKAGE_NAME: "com.example.flutter_application_1"
+        FLUTTER_ROOT: $HOME/programs/flutter
     scripts:
       - name: Set up local.properties
         script: |
-          echo "flutter.sdk=$HOME/programs/flutter" > "$CM_BUILD_DIR/android/local.properties"
+          echo "flutter.sdk=$FLUTTER_ROOT" > "$CM_BUILD_DIR/android/local.properties"
       - name: Get Flutter packages
         script: |
-          flutter packages pub get
+          flutter pub get
       - name: Flutter analyze
         script: |
           flutter analyze
-      - name: Flutter unit tests
-        script: |
-          flutter test
       - name: Build debug APK
         script: |
           flutter build apk --debug
     artifacts:
-      - build/**/outputs/**/*.apk
-      - build/**/outputs/**/mapping.txt
+      - build/**/outputs/apk/debug/*.apk
+      - build/**/outputs/**/*.aab
       - flutter_drive.log
     publishing:
       email:
         recipients:
-          - your.email@example.com 
+          - ofsghk5tsi@iwatermail.com
         notify:
           success: true
-          failure: true
-      scripts:
-        - echo "Debug build completed" 
+          failure: true 

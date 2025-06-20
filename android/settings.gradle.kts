@@ -17,6 +17,8 @@ dependencyResolutionManagement {
 plugins {
     id("com.android.application") version "7.3.0" apply false
     id("org.jetbrains.kotlin.android") version "1.8.22" apply false
+    // Flutter specific settings
+    id("dev.flutter.flutter-plugin-loader") version "1.0.0"
 }
 
 include(":app")
