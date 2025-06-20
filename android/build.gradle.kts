@@ -1,3 +1,7 @@
+plugins {
+    id("dev.flutter.flutter-gradle-plugin")
+}
+
 buildscript {
     ext {
         kotlin_version = "1.8.22"

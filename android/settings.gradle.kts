@@ -1,8 +1,12 @@
 pluginManagement {
     repositories {
+        gradlePluginPortal()
         google()
         mavenCentral()
-        gradlePluginPortal()
+        maven { url = uri("https://storage.googleapis.com/download.flutter.io") }
+    }
+    plugins {
+        id("dev.flutter.flutter-gradle-plugin") version "1.0.0"
     }
 }
 
@@ -11,17 +15,8 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        maven { url = uri("https://storage.googleapis.com/download.flutter.io") }
     }
 }
 
-plugins {
-    id("com.android.application") version "7.3.0" apply false
-    id("org.jetbrains.kotlin.android") version "1.8.22" apply false
-    // Flutter specific settings
-    id("dev.flutter.flutter-plugin-loader") version "1.0.0"
-}
-
 include(":app")
-
-// This is required to provide the Flutter tooling with the Gradle project structure.
-apply(from = "${System.getenv("FLUTTER_ROOT")}/packages/flutter_tools/gradle/app_plugin_loader.gradle")
