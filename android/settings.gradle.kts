@@ -1,25 +1,30 @@
 pluginManagement {
+    def flutterSdkPath = {
+        def properties = new Properties()
+        def propertiesFile = file("local.properties")
+        if (propertiesFile.exists()) {
+            propertiesFile.withInputStream { properties.load(it) }
+            def sdkPath = properties.getProperty("flutter.sdk")
+            if (sdkPath != null) {
+                return sdkPath
+            }
+        }
+        return System.getenv("FLUTTER_ROOT")
+    }()
+
+    includeBuild("$flutterSdkPath/packages/flutter_tools/gradle")
+
     repositories {
+        google()
+        mavenCentral()
         gradlePluginPortal()
-        google()
-        mavenCentral()
-        maven { url = uri("https://storage.googleapis.com/download.flutter.io") }
-    }
-    plugins {
-        id("com.android.application") version "8.2.0" apply false
-        id("org.jetbrains.kotlin.android") version "1.9.22" apply false
-        id("dev.flutter.flutter-gradle-plugin") version "1.0.0" apply false
     }
 }
 
-dependencyResolutionManagement {
-    repositoriesMode.set(RepositoriesMode.PREFER_SETTINGS)
-    repositories {
-        google()
-        mavenCentral()
-        maven { url = uri("https://storage.googleapis.com/download.flutter.io") }
-    }
+plugins {
+    id("dev.flutter.flutter-plugin-loader") version "1.0.0"
+    id("com.android.application") version "8.2.0" apply false
+    id("org.jetbrains.kotlin.android") version "1.9.22" apply false
 }
 
-rootProject.name = "flutter_application_1"
 include(":app")

@@ -13,5 +13,11 @@ allprojects {
         mavenCentral()
     }
 }
-val flutterRoot = System.getenv("FLUTTER_ROOT")
-apply(from = "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle")
+
+rootProject.buildDir = file("../build")
+subprojects {
+    project.buildDir = file("${rootProject.buildDir}/${project.name}")
+}
+subprojects {
+    project.evaluationDependsOn(":app")
+}

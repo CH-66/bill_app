@@ -1,8 +1,8 @@
 plugins {
     id("com.android.application")
-    id("org.jetbrains.kotlin.android")
+    id("kotlin-android")
+    id("dev.flutter.flutter-gradle-plugin")
 }
-
 
 android {
     namespace = "com.example.flutter_application_1"
@@ -19,6 +19,7 @@ android {
     buildTypes {
         getByName("release") {
             isMinifyEnabled = false
+            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
     }
 
@@ -26,7 +27,16 @@ android {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
+
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+
+    lint {
+        disable += "InvalidPackage"
+    }
 }
+
 dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib:1.9.22")
 }
