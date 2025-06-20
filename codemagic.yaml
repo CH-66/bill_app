@@ -2,7 +2,7 @@ workflows:
   build-apk:
     name: Build Debug APK (no signing)
     environment:
-      flutter: "3.32.4"
+      flutter: "3.16.9"
     scripts:
       - name: Install dependencies
         script: flutter pub get
