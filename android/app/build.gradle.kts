@@ -3,7 +3,6 @@ plugins {
     id("org.jetbrains.kotlin.android")
 }
 
-apply(from = "$rootDir/../packages/flutter_tools/gradle/flutter.gradle")
 
 android {
     namespace = "com.example.flutter_application_1"
@@ -27,4 +26,7 @@ android {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
+}
+dependencies {
+    implementation("org.jetbrains.kotlin:kotlin-stdlib:1.9.22")
 }
